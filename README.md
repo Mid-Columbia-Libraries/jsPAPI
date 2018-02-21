@@ -49,22 +49,56 @@ var config = {
     orgid: '1',
     server: 'catalog.midcolumbialibraries.org',
     domain: 'MCL-LIB',
-}}
+};
 
 // Initialize an API instance with the config
-var myApi = new Papi({ config })
+var myApi = new Papi({ config });
 ```
 
 ---
     
 ## Usage
 
-Once initialized you can start calling the API using the various public methods available. All API calls will be returned as an asynchronous promise supporting .then() and .catch() elements. For more information on Promises, see [Using Promises]('https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises'). Here is an example of a simple API call to the bibSearchKW method which will return items with the word `dogs` in the title field:
+Once initialized you can start calling the API using the various public methods available. All API calls will be returned as an asynchronous promise supporting .then() and .catch() chaining. For more information on Promises, see [Using Promises]('https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises'). Here is an example of a simple API call to the bibSearchKW method which will return items with the word `dogs` in the title field:
 
 ``` Javascript
-	// Search for items with 'dogs' in the title
-    myApi.bibSearchKW('dogs', 'TI')
+// Search for items with 'dogs' in the title
+myApi.bibSearchKW('dogs', 'TI')
+    .then(function(response){
+        console.log(response.data);
+    })
+    .catch(function(error){
+        console.log('Oops, something went wrong');
+    });
 ```
+
+You can also have the promise call your own callback function when it returns, for example here is a call to the more complex bibSearch() function which would return items with Author=Tolkien but NOT title=Hobbit:
+
+``` Javascript
+// Search for items with 'dogs' in the title
+test.bibSearch([['AND','AU','tolkien'],['NOT','TI','hobbit']])
+    .then(myThenFunction)
+    .catch(myCatchFunction);
+
+var myThenFunction = function(response) {
+    console.log(response.data);
+}
+
+var myCatchFunction = function(error) {
+    console.error(error);
+}
+```
+
+NOTE: The .then() block will invoke your callback function automatically. Do NOT directly invoke the function in the then() block unless you understand closures and intend to invoke one, example:
+
+``` Javascript
+// This probably does not do what you think it does, do not do this unless you are intending to invoke a closure
+test.bibSearch([['AND','AU','tolkien'],['NOT','TI','hobbit']])
+    .then(myThenFunction(response))
+    .catch(myCatchFunction(error));
+```
+
+For examples of each public funtion see the respective function documentation page.
 
 ---
     
