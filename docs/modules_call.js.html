@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: modules/call.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: modules/call.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** 
+ * @module Papi/call
+ */
+
+/**
+ * 
+ * Send a call to the polaris API
+ * 
+ * This function does most of the heavy lifting of talking to the API.
+ * It will load default values for most things but you can override by passing params
+ *
+ * @param {string} url              - the endpoint being requested
+ * @param {object} [params]         - you can override default options &amp; env settings by passing options in params
+ * @param {string} [params.scheme]  - ex: https://
+ * @param {string} [params.server]  - ex: polaris.mylibrary.org
+ * @param {string} [params.path]    - ex: PAPIService/REST
+ * @param {string} [params.version] - ex: v1
+ * @param {string} [params.appid]   - ex: 100
+ * @param {string} [params.orgid]   - ex: 1
+ * @param {string} [params.method]  - ex: GET
+ * @param {string} [params.auth]    - ex: public
+ * @param {string} [params.pass]    - ex: myPassword
+ * @param {string} [params.token]   - Generated Staff Authorization Token
+ * @param {string} [params.lang]    - ex: 1033
+ * @param {string} [params.encode]  - ex: application/json
+ * @param {string} [params.accept]  - ex: application/json
+ * @param {object} [data]           - required for POST/PUT methods, accepts basically anything Javascript can stringify
+ * 
+ * @requires axios
+ * @requires es6-promise
+ * 
+ * @returns {promise}               - an Axios Promise
+ * 
+ * Example:
+
+    var myApiCall = new papi();
+
+    myApiCall.call('bib/979127', { lang: '3082' })
+    .then(function(response){
+        console.log(response);
+    })
+    .catch(function(error) {
+        console.log(error);
+    };
+
+*/
+     
+module.exports = function(parent) {
+    parent.call = function(endpoint, params = {}, data = false) {
+        var axios = require('axios');
+        var Promise = require('es6-promise').Promise;
+
+        // Get root config
+        var config = parent.configGet('all');
+
+        // Check for input params, otherwise use defaults
+        for(key in config) {
+            params[key] = typeof(params[key] === 'undefined') ? config[key] : params[key];
+        }
+        
+        // Implode base path pieces
+        var url = params.scheme + [ params.server , params.path , params.auth , params.version , params.lang , params.appid , params.orgid]
+            .join('/');
+
+        // If calling a protected method, append the authentication token
+        if(params.auth == 'protected') {
+            if(params.token) {
+                url = url + '/' + params.token;
+            }
+        }
+
+        // Append endpoint
+        url = url + '/' + endpoint;
+
+        // Generate date and signature elements
+        sig = parent._buildSignature(params.method.toUpperCase(), url, params.token);
+
+        // Build Axios Config
+        var cfg = {
+            headers: {
+                'Content-Type': params.encode,
+                'Accept': params.accept,
+                'PolarisDate': sig.date,
+                'Authorization': sig.sig,
+            },
+            method: params.method,
+            url: encodeURI(url)
+        }
+
+        // If data was provided, encode and include it in the request
+        if(data) cfg.data = data;
+
+        // Call Axios
+        return rq = axios(cfg);
+
+    }
+    return parent;
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Papi.html">Papi</a></li><li><a href="module-Papi_authenticatePatron.html">Papi/authenticatePatron</a></li><li><a href="module-Papi_authenticateStaff.html">Papi/authenticateStaff</a></li><li><a href="module-Papi_bibGet.html">Papi/bibGet</a></li><li><a href="module-Papi_bibHoldingsGet.html">Papi/bibHoldingsGet</a></li><li><a href="module-Papi_bibSearch.html">Papi/bibSearch</a></li><li><a href="module-Papi_bibSearchKW.html">Papi/bibSearchKW</a></li><li><a href="module-Papi_call.html">Papi/call</a></li><li><a href="module-Papi_collectionsGet.html">Papi/collectionsGet</a></li><li><a href="module-Papi_configGet.html">Papi/configGet</a></li><li><a href="module-Papi_configSet.html">Papi/configSet</a></li><li><a href="module-Papi_limitFiltersGet.html">Papi/limitFiltersGet</a></li><li><a href="module-Papi_organizationsGet.html">Papi/organizationsGet</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 21 2018 11:45:02 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
