@@ -2,7 +2,7 @@
 
 ## Documentation
 
-See documentation in `./docs` or [online](https://git.midcolumbialibraries.org/jsPapi):
+Developer documentation of public methods is available in `./docs` or [online](https://mid-columbia-libraries.github.io/jsPAPI/):
 
 ## Contact
 
