@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/configGet.js</title>
+    <title>JSDoc: Source: jsPAPI.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/configGet.js</h1>
+    <h1 class="page-title">Source: jsPAPI.js</h1>
 
     
 
@@ -27,29 +27,61 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/** 
- * @module Papi/configGet
+ * @module jsPAPI
  */
 
-/**
- * Returns value of root config with given key
- *
- * @param {object} key - the key to lookup
- * 
- * @returns {variable} the value
+
+/*
+ * Notes
+ * Access Secret - Can be used by staff to emulate user password
+ * Access Token - used for staff only requests, must go in URL
  * 
  */
 
-module.exports = function(parent) {
-    parent.configGet = function(key) {
-        // Return full config
-        if(key == 'all') {
-            return parent._config;
-        }
-        // Otherwise return request key
-        return parent._config[key];
-    }
-    return parent;
-}</code></pre>
+module.exports = function(config = {}, customModules = false) {
+
+    // Define private and public objects
+    var root = {};
+    var pub = {};
+
+    // Define default module list
+    var modules = [
+        '_buildSignature',
+        '_init',
+        '_log',
+        '_polarisDate',
+        'configGet',
+        'configSet',
+        'call',
+        'limitFiltersGet',
+        'organizationsGet',
+        'authenticatePatron',
+        'authenticateStaff',
+        'bibGet',
+        'bibSearch',
+        'bibSearchKW',
+        'bibHoldingsGet',
+        'collectionsGet',
+    ];
+
+    // Override defaults if customModules provided
+    if(customModules !== false) modules = customModules;
+
+    // Load modules
+    modules.forEach(function(file){
+        root = require('./modules/' + file)(root);
+        if(file.charAt(0) != '_') pub[file] = root[file];
+    });
+
+    // Run init setup
+    root._init(config);
+
+    // Return public object
+    return pub;
+};
+
+
+</code></pre>
         </article>
     </section>
 
