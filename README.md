@@ -1,4 +1,4 @@
-# JS-Polaris-API
+# JS-Polaris-API | jsPAPI
 
 ## Documentation
 
