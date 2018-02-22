@@ -10,7 +10,7 @@ The JS-Polaris-API is developed and maintained by Vance Cole at Mid-Columbia Lib
 
 ---
 
-## Instalation
+## Installation
 
 You can install JS-Polaris-API by cloning the repository or by downloading the compiled package.
 
