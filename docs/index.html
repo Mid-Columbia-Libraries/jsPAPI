@@ -43,81 +43,133 @@
 
 
     <section>
-        <article><h1>JS-Polaris-API | jsPAPI</h1><h2>Documentation</h2><p>Developer documentation of public methods is available in <code>./docs</code> or <a href="https://mid-columbia-libraries.github.io/jsPAPI/">online</a>:</p>
-<h2>Contact</h2><p>The JS-Polaris-API is developed and maintained by Vance Cole at Mid-Columbia Libraries in Washington State. If you need help or have questions please feel free to contact me, <a href="mailto:vcole@midcolumbialibraries.org">vcole@midcolumbialibraries.org</a>.</p>
+        <article><h1>jsPAPI  |  A JavaScript Polaris API Wrapper</h1><ul>
+<li><a href="#status">Project Status</a></li>
+<li><a href="#docs">Documentation</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="#install">Installation</a></li>
+<li><a href="#init">Initialization</a></li>
+<li><a href="#config">Configuration</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#faq">FAQ / Troubleshooting</a></li>
+</ul>
 <hr>
-<h2>Installation</h2><p>You can install JS-Polaris-API by cloning the repository or by downloading the compiled package.</p>
-<p>If you want to extend the API or use JS-Polaris-API in a NodeJS application you should probably clone the source repo. You will need <a href="https://nodejs.org/en/">NodeJS</a> and <a href="https://www.npmjs.com/">NPM</a> to install dependencies:</p>
-<pre class="prettyprint source lang-Bash"><code>mkdir jsPAPI
-git clone https://github.com/Mid-Columbia-Libraries/jsPAPI jsPAPI
-cd jsPAPI
-npm install</code></pre><p>If you simply want to be able to use JS-Polaris-API from your web application, you can simply extract the base or minified version from <code>./dist</code> and include it in your HTML:</p>
+<h2><a name="status"></a>Project Status</h2><p>jsPAPI is currently in development under v 0.0.1</p>
+<p>jsPAPI currently implements the bib and catalog related public methods of the Polaris API, patron and staff authentication, and a flexible module core.</p>
+<p>Protected method implementation is coming soon, in the mean time all Polaris API methods can be invoked manually via the jsPAPI.call() method.</p>
+<p>Roadmap:</p>
+<ul>
+<li>Modular loader core: 95%</li>
+<li>Documentation: Complete for implemented methods</li>
+<li>Unit Tests: next major release</li>
+<li>Protected methods: work in progress</li>
+</ul>
+<hr>
+<h2><a name="docs"></a>Documentation</h2><p>Developer documentation of public methods is available in <code>./docs</code> or <a href="https://mid-columbia-libraries.github.io/jsPAPI/">online</a>:</p>
+<hr>
+<h2><a name="contact"></a>Contact</h2><p>jsPAPI is developed and maintained by Vance Cole at Mid-Columbia Libraries in Washington State. If you need help or have questions please feel free to contact me, <a href="mailto:vcole@midcolumbialibraries.org">vcole@midcolumbialibraries.org</a>.</p>
+<p>Pull requests are welcome, especially for quality implementations of the various protected API methods.</p>
+<hr>
+<h2><a name="install"></a>Installation</h2><h3>For NodeJS</h3><p>jsPAPI is not yet published to NPM.</p>
+<p>You can install jsPAPI by cloning the repository or by downloading the compiled package.</p>
+<p>If you want to extend the API or use jsPAPI in a NodeJS application you should probably clone the source repo. You will need <a href="https://nodejs.org/en/">NodeJS</a> and <a href="https://www.npmjs.com/">NPM</a> to install dependencies:</p>
+<pre class="prettyprint source lang-Bash"><code>    git clone https://github.com/Mid-Columbia-Libraries/jsPAPI jspapi
+    cd jspapi
+    npm install</code></pre><p>You may want to copy <code>.env.example</code> to <code>.env</code> to set up your environment variables such as your API Server, key, AccessID and Domain. If you are using jsPAPI for browsers you must instead pass configuration at initialization, see <a href="#init">initialization</a>.</p>
+<pre class="prettyprint source lang-Bash"><code>    cp .env.example .env</code></pre><p>See <a href="#config">configuration</a> for a list of valid configuration options.</p>
+<h3>For Browsers</h3><p>If you want to be able to use jsPAPI from your web application, you can simply extract the base or minified version from <code>./dist</code> and include it in your HTML:</p>
 <pre class="prettyprint source lang-HTML"><code>    &lt;script src=&quot;js-polaris-api.min.js&quot;>&lt;/script></code></pre><hr>
-<h2>Initialization</h2><p>JS-Polaris-API is namespaced under the global <code>jsPAPI</code>.</p>
-<p>To start using the API you will need to create an instance of the jsPAPI class and pass it configuration for your API Server:</p>
-<pre class="prettyprint source lang-Javascript"><code>// Most configuration options have reasonable defaults
-// The below example shows the essential params you need
-// to set which are specific to your organization
-var config = {
-    accessid: 'MyAppID',
-    key: 'SUPERSEC-RETC-ODES-DONT-PUBLISHONWEB',
-    server: 'catalog.mylibrary.org',
-    domain: 'MY-LIB',
-    orgid: '1',
-};
+<h2><a name="init"></a>Initialization</h2><p>jsPAPI is namespaced under the global <code>jsPAPI</code>.</p>
+<p>To start using the API you will need to create an instance of the jsPAPI class and pass it configuration for your API Server. This can be accomplished by either editing your .env file, or passing parameters to the instance when you create it:</p>
+<pre class="prettyprint source lang-Javascript"><code>    // Most configuration options have reasonable defaults
+    // The below example shows the essential params you need
+    // to set which are specific to your organization
+    var config = {
+        accessid: 'your-web-app',
+        key: 'W3CV1V1H-GBUC-3E3P-QP42-1M9CODN0LHVU',
+        orgid: '1',
+        server: 'catalog.midcolumbialibraries.org',
+        domain: 'MCL-LIB',
+    };
 
-// Initialize an API instance with the config
-var myApi = new Papi({ config });</code></pre><hr>
-<h2>Usage</h2><p>Once initialized you can start calling the API using the various public methods available. All API calls will be returned as an asynchronous promise supporting .then() and .catch() chaining. For more information on Promises, see <a href="'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises'">Using Promises</a>. Here is an example of a simple API call to the bibSearchKW method which will return items with the word <code>dogs</code> in the title field:</p>
-<pre class="prettyprint source lang-Javascript"><code>// Search for items with 'dogs' in the title
-myApi.bibSearchKW('dogs', 'TI')
-    .then(function(response){
-        console.log(response.data);
-    })
-    .catch(function(error){
-        console.log('Oops, something went wrong');
-    });</code></pre><p>You can also have the promise call your own callback function when it returns, for example here is a call to the more complex bibSearch() function which would return items with Author=Tolkien but NOT title=Hobbit:</p>
-<pre class="prettyprint source lang-Javascript"><code>// Search for items with 'dogs' in the title
-test.bibSearch([['AND','AU','tolkien'],['NOT','TI','hobbit']])
-    .then(myThenFunction)
-    .catch(myCatchFunction);
-
-var myThenFunction = function(response) {
-    console.log(response.data);
-}
-
-var myCatchFunction = function(error) {
-    console.error(error);
-}</code></pre><p>NOTE: The .then() block will invoke your callback function automatically. Do NOT directly invoke the function in the then() block unless you understand closures and intend to invoke one, example:</p>
-<pre class="prettyprint source lang-Javascript"><code>// This probably does not do what you think it does, do not do this unless you are intending to invoke a closure
-test.bibSearch([['AND','AU','tolkien'],['NOT','TI','hobbit']])
-    .then(myThenFunction(response))
-    .catch(myCatchFunction(error));</code></pre><p>For examples of each public funtion see the respective function documentation page.</p>
+    // Initialize an API instance with the config
+    var myApi = new Papi({ config });</code></pre><hr>
+<h2><a name="config"></a>Configuration</h2><h3>The following values are required</h3><p>Your accessid and api key can be found or created in the Polaris Web Admin Tool under the <code>PAPI Key Management</code> tab, or provided by Polaris.</p>
+<p>Your server is the domain (without scheme) that your server is listening on, for example <code>catalog.my-library.org</code></p>
+<p>Your domain is the domain that Polaris uses to authenticate staff, in the Polaris ILS Client your domain will be listed under your User name and Password fields during log on. Domain, Key and AccessID are not necessary if you are using only public methods of the API and have enabled Patron Only level authentication on your server, <a href="#disable-key">see here</a> for details.</p>
+<ul>
+<li>server</li>
+<li>accessid</li>
+<li>key</li>
+<li>domain</li>
+</ul>
+<h3>The following values have sane defaults which should work in most cases, but can be overridden if needed</h3><ul>
+<li>appid - 100</li>
+<li>orgid - 1</li>
+<li>scheme - https://</li>
+<li>path - PAPIService/REST</li>
+<li>version - v1</li>
+<li>lang - 1033</li>
+<li>encode - 'application/json'</li>
+<li>accept - 'application/json'</li>
+<li>logging - true</li>
+<li>authlevel - all</li>
+</ul>
 <hr>
-<h2>FAQ / Troubleshooting</h2><h3>I am trying to run the API in my NodeJS project but I am getting an error like <code>Error: Cannot find module ...</code> or <code>... is not recognized as an internal or external command...</code></h3><p>You probably forgot to install dependencies. Run:</p>
+<h2><a name="usage"></a>Usage</h2><p>Once initialized you can start calling the API using the various methods available. All API calls will be returned as an asynchronous promise supporting .then() and .catch() chaining. For more information on Promises, see <a href="'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises'">Using Promises</a>. Here is an example of a simple API call to the bibSearchKW method which will return items with the word <code>dogs</code> in the title field:</p>
+<pre class="prettyprint source lang-Javascript"><code>    // Search for items with 'dogs' in the title
+    myApi.bibSearchKW('dogs', 'TI')
+        .then(function(response){
+            console.log(response.data);
+        })
+        .catch(function(error){
+            console.log('Oops, something went wrong');
+        });</code></pre><p>You can also have the promise call your own callback function when it returns, for example here is a call to the more complex bibSearch() function which would return items with Author=Tolkien but NOT title=Hobbit:</p>
+<pre class="prettyprint source lang-Javascript"><code>// Search for items with 'dogs' in the title
+    test.bibSearch([['AND','AU','tolkien'],['NOT','TI','hobbit']])
+        .then(myThenFunction)
+        .catch(myCatchFunction);
+
+    var myThenFunction = function(response) {
+        console.log(response.data);
+    }
+
+    var myCatchFunction = function(error) {
+        console.error(error);
+    }</code></pre><p>NOTE: The .then() block will invoke your callback function automatically. Do NOT directly invoke the function in the then() block unless you understand closures and intend to invoke one, example:</p>
+<pre class="prettyprint source lang-Javascript"><code>    // This probably does not do what you think it does, do not do this unless you are intending to invoke a closure
+    test.bibSearch([['AND','AU','tolkien'],['NOT','TI','hobbit']])
+        .then(myThenFunction(response))
+        .catch(myCatchFunction(error));</code></pre><p>For examples of each public funtion see the respective function documentation page.</p>
+<hr>
+<h2><a name="faq"></a>FAQ / Troubleshooting</h2><h3>I am trying to run the API in my NodeJS project but I am getting an error like <code>Error: Cannot find module ...</code> or <code>... is not recognized as an internal or external command...</code></h3><p>You probably forgot to install dependencies. Run:</p>
 <pre class="prettyprint source lang-Bash"><code>    npm install</code></pre><h3>My browser console says something about <code>XMLHttpRequest cannot load</code> ... and <code>CORS</code>, <code>Access-Control-Allow-Origin</code>, <code>Access-Control-Allow-Methods</code> or <code>Access-Control-Allow-Headers</code></h3><p>By default the Polaris API server that Innovative sets up for you does not set headers to allow AJAX requests originating on cross domain origins. Mostly only client-side code running in browsers will care about this, NodeJS or other back-end services generally will happily accept responses cross domain.</p>
 <p>You can add the required headers by editing <code>web.config</code> in your PAPIService\REST directory, usually at <code>C:\Program Files\Polaris\{version}\PAPIService\REST\web.config</code>. Add the following code somewhere in between <code>&lt;system.webServer&gt;</code> and <code>&lt;/system.webserver&gt;</code></p>
 <pre class="prettyprint source lang-XML"><code>&lt;!-- Allow CORS -->
-&lt;httpProtocol>
-    &lt;customHeaders>
-    &lt;add name=&quot;Access-Control-Allow-Origin&quot; value=&quot;*&quot; />
-    &lt;add name=&quot;Access-Control-Allow-Methods&quot; value=&quot;GET,PUT,POST,DELETE,PATCH,OPTIONS&quot; />
-    &lt;add name=&quot;Access-Control-Allow-Headers&quot; value=&quot;Authorization, PolarisDate&quot; />
-    &lt;/customHeaders>
-&lt;/httpProtocol></code></pre><p>You will need to restart IIS for this to take effect. Open a command prompt with administrator priviledges and type:</p>
-<pre class="prettyprint source lang-Powershell"><code>    iisreset</code></pre><p>You may also encounter this issue if you are trying to make API requests from an HTML file running locally on your machine, for example <code>file:///C:/Users/you/Desktop/myPage.html</code>. This is a security restriction in certain browsers such as Chrome. You can fix this by hosting your development file on some sort of web server. If you installed JS-Polaris-API and its development dependencies with NPM you can use the built in development server:</p>
-<pre class="prettyprint source lang-Bash"><code>    npm run start</code></pre><h3>I want to call the Polaris API's public methods such as bibGet() and bibSearch() directly from the browser, but I don't want to release our API key</h3><p>Edit <code>appsettings.config</code> in your PAPIService\REST directory, usually at <code>C:\Program Files\Polaris\{version}\PAPIService\REST\appsettings.config</code>. Change the line that says:</p>
+    &lt;httpProtocol>
+        &lt;customHeaders>
+        &lt;add name=&quot;Access-Control-Allow-Origin&quot; value=&quot;*&quot; />
+        &lt;add name=&quot;Access-Control-Allow-Methods&quot; value=&quot;GET,PUT,POST,DELETE,PATCH,OPTIONS&quot; />
+        &lt;add name=&quot;Access-Control-Allow-Headers&quot; value=&quot;Authorization, PolarisDate&quot; />
+        &lt;/customHeaders>
+    &lt;/httpProtocol></code></pre><p>You will need to restart IIS for this to take effect. Open a command prompt with administrator priviledges and type:</p>
+<pre class="prettyprint source lang-Powershell"><code>    iisreset</code></pre><p>You may also encounter this issue if you are trying to make API requests from an HTML file running locally on your machine, for example <code>file:///C:/Users/you/Desktop/myPage.html</code>. This is a security restriction in certain browsers such as Chrome. You can fix this by hosting your development file on some sort of web server. If you installed jsPAPI and its development dependencies with NPM you can use the built in development server:</p>
+<pre class="prettyprint source lang-Bash"><code>    npm run start</code></pre><h3><a name="disable-key"></a>I want to call the Polaris API's public methods such as bibGet() and bibSearch() directly from the browser, but I don't want to release our API key</h3><p>Edit <code>appsettings.config</code> in your PAPIService\REST directory, usually at <code>C:\Program Files\Polaris\{version}\PAPIService\REST\appsettings.config</code>. Change the line that says:</p>
 <pre class="prettyprint source lang-XML"><code>    &lt;add key=&quot;AuthenticationLevel&quot; value=&quot;ALL&quot;/></code></pre><p>to</p>
 <pre class="prettyprint source lang-XML"><code>    &lt;add key=&quot;AuthenticationLevel&quot; value=&quot;PATRON&quot;/></code></pre><p>You will need to restart IIS for this to take effect. Open a command prompt with administrator priviledges and type:</p>
 <pre class="prettyprint source lang-Powershell"><code>    iisreset</code></pre><p>Now you can initialize the PolarisAPI with the config parameter &quot;authlevel&quot;:&quot;patron&quot; and you will be able to call public methods without an access key.</p>
-<h3>What is the built-in development server and how do I use it?</h3><p>JS-Polaris-API uses Webpack to bundle for deployment to browsers and includes a setup to use the Webpack Development &amp; Hot Reload Server. To start the server, run:</p>
-<pre class="prettyprint source lang-Bash"><code>    npm run start</code></pre><p>This will bundle and regenerate the <code>./dist</code> directory. Now open your browser to the development URL webpack provides (default http://localhost:8080/). Changes you make to the API library and custom folders will automatically repack and reload. Exit the server by pressing <code>ctrl-c | cmd c</code></p>
+<h3>What is the built-in development server and how do I use it?</h3><p>jsPAPI uses Webpack to bundle for deployment to browsers and includes a setup to use the Webpack Development &amp; Hot Reload Server. To start the server, run:</p>
+<pre class="prettyprint source lang-Bash"><code>    npm run start</code></pre><p>This will bundle and regenerate the <code>./dist</code> directory. Now open your browser to the development URL webpack provides (default http://localhost:8080/). Changes you make to the API library and custom folders will automatically repack and reload. Exit the server by pressing <code>ctrl-c</code> or <code>cmd c</code></p>
 <h3>I want to extend or modify JS-Polaris-API, how do I do so?</h3><p>You can add custom modules to <code>./lib/custom</code> and they will be loaded after stock modules. Your custom modules can either implement new functions which will work alongside the default methods, or you can replace default methods. To get started, copy an existing method from <code>./lib/modules</code> and edit the contents. If you need to rebuild the distribution bundle for use in a web based project run:</p>
-<pre class="prettyprint source lang-Bash"><code>    npm run build</code></pre><h3>My browser or server console says something about <code>401 Unauthorized</code></h3><p>There are a number of causes for this.</p>
+<pre class="prettyprint source lang-Bash"><code>    npm run build</code></pre><p>or</p>
+<pre class="prettyprint source lang-Bash"><code>    npm run watch</code></pre><h3>My browser or server console says something about <code>401 Unauthorized</code></h3><p>There are a number of causes for this.</p>
 <ul>
 <li>Make sure you provided a valid API Key, AccessID and Domain when you initialized your API.</li>
+<li>If you are trying to call a patron or staff protected method, ensure you provided a valid and not-expired authentication token from <code>authenticatePatron</code> or <code>authenticateStaff()</code></li>
 <li>If you tried using an HTTP Scheme, try HTTPS.</li>
 <li>Make sure your system time is set correctly on both your client and server machines</li>
+<li>Your IIS server could be configured to deny requests to the API from outside your local network </li>
+<li>Check your IIS logs on the Polaris API Server for hints</li>
 </ul></article>
     </section>
 
@@ -129,13 +181,13 @@ test.bibSearch([['AND','AU','tolkien'],['NOT','TI','hobbit']])
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-jsPAPI__buildSignature.html">jsPAPI/_buildSignature</a></li><li><a href="module-jsPAPI__init.html">jsPAPI/_init</a></li><li><a href="module-jsPAPI__log.html">jsPAPI/_log</a></li><li><a href="module-jsPAPI__polarisDate.html">jsPAPI/_polarisDate</a></li><li><a href="module-jsPAPI_authenticatePatron.html">jsPAPI/authenticatePatron</a></li><li><a href="module-jsPAPI_authenticateStaff.html">jsPAPI/authenticateStaff</a></li><li><a href="module-jsPAPI_bibGet.html">jsPAPI/bibGet</a></li><li><a href="module-jsPAPI_bibHoldingsGet.html">jsPAPI/bibHoldingsGet</a></li><li><a href="module-jsPAPI_bibSearch.html">jsPAPI/bibSearch</a></li><li><a href="module-jsPAPI_bibSearchKW.html">jsPAPI/bibSearchKW</a></li><li><a href="module-jsPAPI_call.html">jsPAPI/call</a></li><li><a href="module-jsPAPI_collectionsGet.html">jsPAPI/collectionsGet</a></li><li><a href="module-jsPAPI_configGet.html">jsPAPI/configGet</a></li><li><a href="module-jsPAPI_configSet.html">jsPAPI/configSet</a></li><li><a href="module-jsPAPI_limitFiltersGet.html">jsPAPI/limitFiltersGet</a></li><li><a href="module-jsPAPI_organizationsGet.html">jsPAPI/organizationsGet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#jsPAPI">jsPAPI</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="global.html#jsPAPI#.module:_buildSignature">_buildSignature</a></li><li><a href="global.html#jsPAPI#.module:_init">_init</a></li><li><a href="global.html#jsPAPI#.module:_log">_log</a></li><li><a href="global.html#jsPAPI#.module:_polarisDate">_polarisDate</a></li><li><a href="global.html#jsPAPI#.module:authenticatePatron">authenticatePatron</a></li><li><a href="global.html#jsPAPI#.module:authenticateStaff">authenticateStaff</a></li><li><a href="global.html#jsPAPI#.module:bibGet">bibGet</a></li><li><a href="global.html#jsPAPI#.module:bibHoldingsGet">bibHoldingsGet</a></li><li><a href="global.html#jsPAPI#.module:bibSearch">bibSearch</a></li><li><a href="global.html#jsPAPI#.module:bibSearchKW">bibSearchKW</a></li><li><a href="global.html#jsPAPI#.module:call">call</a></li><li><a href="global.html#jsPAPI#.module:collectionsGet">collectionsGet</a></li><li><a href="global.html#jsPAPI#.module:configGet">configGet</a></li><li><a href="global.html#jsPAPI#.module:configSet">configSet</a></li><li><a href="global.html#jsPAPI#.module:limitFiltersGet">limitFiltersGet</a></li><li><a href="global.html#jsPAPI#.module:organizationsGet">organizationsGet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#jsPAPI">jsPAPI</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 21 2018 22:45:21 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Feb 22 2018 08:24:55 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
