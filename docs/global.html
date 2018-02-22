@@ -396,7 +396,7 @@
     
 
     
-    <h4 class="name" id="module:jsPAPI/_init"><span class="type-signature"></span>module:jsPAPI/_init<span class="signature">(cfg)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="module:jsPAPI/_init"><span class="type-signature"></span>module:jsPAPI/_init<span class="signature">(cfg)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -497,7 +497,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules__init.js.html">modules/_init.js</a>, <a href="modules__init.js.html#line12">line 12</a>
+        <a href="modules__init.js.html">modules/_init.js</a>, <a href="modules__init.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -520,6 +520,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - true for success, false for failure
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -531,7 +553,7 @@
     
 
     
-    <h4 class="name" id="module:jsPAPI/_log"><span class="type-signature"></span>module:jsPAPI/_log<span class="signature">(dump)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="module:jsPAPI/_log"><span class="type-signature"></span>module:jsPAPI/_log<span class="signature">(dump)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -632,7 +654,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules__log.js.html">modules/_log.js</a>, <a href="modules__log.js.html#line13">line 13</a>
+        <a href="modules__log.js.html">modules/_log.js</a>, <a href="modules__log.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -655,6 +677,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    true if logging enabled, otherwise false
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -750,7 +794,7 @@
 
         
 <div class="param-desc">
-    - RFC-1123 formatted
+    - RFC-1123 formatted date string
 </div>
 
 
@@ -903,7 +947,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_authenticatePatron.js.html">modules/authenticatePatron.js</a>, <a href="modules_authenticatePatron.js.html#line13">line 13</a>
+        <a href="modules_authenticatePatron.js.html">modules/authenticatePatron.js</a>, <a href="modules_authenticatePatron.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -946,6 +990,11 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>myPapi.authenticatePatron('1234567890', 'patron-password').then(function(response){  });</code></pre>
 
 
 
@@ -1509,7 +1558,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>myPapi.bibGet('1314713').then(function(response){ });</code></pre>
+    <pre class="prettyprint"><code>myPapi.bibHoldingsGet('123456').then(function(response){ });</code></pre>
 
 
 
@@ -1592,7 +1641,7 @@
 
             
 
-            <td class="description last">either a literal string or an array of the form [[bool, filter, value],['AND', 'TI', 'Tolkien'], ...]</td>
+            <td class="description last">either a literal string or an array of the form [[bool, filter, value],['AND', 'AU', 'Tolkien'], ...]</td>
         </tr>
 
     
@@ -1773,7 +1822,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_bibSearch.js.html">modules/bibSearch.js</a>, <a href="modules_bibSearch.js.html#line19">line 19</a>
+        <a href="modules_bibSearch.js.html">modules/bibSearch.js</a>, <a href="modules_bibSearch.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -1818,9 +1867,11 @@
 
 
 
-    <h5>Example</h5>
+    <h5>Examples</h5>
     
-    <pre class="prettyprint"><code>myPapi.bibSearchKW('dogs', 'KW').then(function(response){ });</code></pre>
+    <pre class="prettyprint"><code>myPapi.bibSearch('KW=dogs').then(function(response){ });</code></pre>
+
+    <pre class="prettyprint"><code>myPapi.bibSearch([['AND','AU','Tolkien'],['NOT','TI','Hobbits']]).then(function(response){ });</code></pre>
 
 
 
@@ -2731,17 +2782,7 @@
 
         
 <div class="param-desc">
-    - an Axios PromiseExample:
-
-    var myApiCall = new papi();
-
-    myApiCall.call('bib/979127', { lang: '3082' })
-    .then(function(response){
-        console.log(response);
-    })
-    .catch(function(error) {
-        console.log(error);
-    };
+    - an Axios Promise
 </div>
 
 
@@ -2761,6 +2802,19 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>var myApiCall = new papi();
+
+    myApiCall.call('bib/979127', { lang: '3082' })
+    .then(function(response){
+        console.log(response);
+    })
+    .catch(function(error) {
+        console.log(error);
+    };</code></pre>
 
 
 
@@ -2891,7 +2945,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_collectionsGet.js.html">modules/collectionsGet.js</a>, <a href="modules_collectionsGet.js.html#line16">line 16</a>
+        <a href="modules_collectionsGet.js.html">modules/collectionsGet.js</a>, <a href="modules_collectionsGet.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -2934,6 +2988,13 @@
     
 
 
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>myPapi.collectionsGet().then(function(response){ });</code></pre>
+
+    <pre class="prettyprint"><code>myPapi.collectionsGet('3').then(function(response){ });</code></pre>
 
 
 
@@ -3044,7 +3105,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_configGet.js.html">modules/configGet.js</a>, <a href="modules_configGet.js.html#line14">line 14</a>
+        <a href="modules_configGet.js.html">modules/configGet.js</a>, <a href="modules_configGet.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -3091,6 +3152,13 @@
     
 
 
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>myPapi.configGet('all');</code></pre>
+
+    <pre class="prettyprint"><code>myPapi.configGet('lang');</code></pre>
 
 
 
@@ -3201,7 +3269,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_configSet.js.html">modules/configSet.js</a>, <a href="modules_configSet.js.html#line12">line 12</a>
+        <a href="modules_configSet.js.html">modules/configSet.js</a>, <a href="modules_configSet.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -3226,6 +3294,13 @@
 
 
 
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>myPapi.configSet( {{lang:'1033'}} );</code></pre>
+
+    <pre class="prettyprint"><code>myPapi.configSet( { {lang:'1033'} , {orgid:'6'} } );</code></pre>
 
 
 
@@ -3287,7 +3362,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_limitFiltersGet.js.html">modules/limitFiltersGet.js</a>, <a href="modules_limitFiltersGet.js.html#line13">line 13</a>
+        <a href="modules_limitFiltersGet.js.html">modules/limitFiltersGet.js</a>, <a href="modules_limitFiltersGet.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -3330,6 +3405,11 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>myPapi.limitFiltersGet().then(function(response) { });</code></pre>
 
 
 
@@ -3460,7 +3540,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_organizationsGet.js.html">modules/organizationsGet.js</a>, <a href="modules_organizationsGet.js.html#line12">line 12</a>
+        <a href="modules_organizationsGet.js.html">modules/organizationsGet.js</a>, <a href="modules_organizationsGet.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -3505,6 +3585,11 @@
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>myPapi.organizationsGet('branch').then(function(response) { });</code></pre>
+
+
 
         
     
@@ -3528,7 +3613,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 21 2018 22:17:06 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 21 2018 22:39:19 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
