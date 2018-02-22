@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/authenticatePatron.js</title>
+    <title>JSDoc: Source: modules/_polarisDate.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/authenticatePatron.js</h1>
+    <h1 class="page-title">Source: modules/_polarisDate.js</h1>
 
     
 
@@ -27,27 +27,22 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/** 
- * @module jsPAPI/authenticatePatron
+ * @module jsPAPI/_polarisDate
  */
 
 /**
- * Authenticates and returns an access token for a patron
+ * Get date formated to RFC-1123.
  *
- * @param {string} barcode
- * @param {string} password
- * 
- * @returns {promise}
-*/
+ * @returns {string} - RFC-1123 formatted
+ */
+
 module.exports = function(parent) {
-    parent.authenticatePatron = function(barcode, password) {
-        return parent.call(
-            'authenticator/patron',
-            { auth: 'public', method: 'POST' },
-            { "Barcode": barcode, "Password": password }
-        );
+    parent._polarisDate = function() {
+        return new Date().toUTCString();
     }
     return parent;
-}</code></pre>
+}
+</code></pre>
         </article>
     </section>
 

@@ -94,7 +94,7 @@ describe('Public Methods', function() {
 	var api = new jsPAPI({ logging: false });
 
 	describe('call()', function() {
-		it('to return a promise', function() {
+		it('should return a promise', function() {
 			expect(api.call()).to.be.a('promise');
 		});
 	});

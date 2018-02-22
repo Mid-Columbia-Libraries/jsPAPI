@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/authenticatePatron.js</title>
+    <title>JSDoc: Module: jsPAPI/_polarisDate</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,39 +17,162 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/authenticatePatron.js</h1>
+    <h1 class="page-title">Module: jsPAPI/_polarisDate</h1>
 
     
 
 
 
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/** 
- * @module jsPAPI/authenticatePatron
- */
 
-/**
- * Authenticates and returns an access token for a patron
- *
- * @param {string} barcode
- * @param {string} password
- * 
- * @returns {promise}
-*/
-module.exports = function(parent) {
-    parent.authenticatePatron = function(barcode, password) {
-        return parent.call(
-            'authenticator/patron',
-            { auth: 'public', method: 'POST' },
-            { "Barcode": barcode, "Password": password }
-        );
-    }
-    return parent;
-}</code></pre>
-        </article>
-    </section>
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="module:jsPAPI/_polarisDate"><span class="type-signature"></span>(require("jsPAPI/_polarisDate"))<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get date formated to RFC-1123.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="modules__polarisDate.js.html">modules/_polarisDate.js</a>, <a href="modules__polarisDate.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - RFC-1123 formatted
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

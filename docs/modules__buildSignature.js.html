@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/authenticatePatron.js</title>
+    <title>JSDoc: Source: modules/_buildSignature.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/authenticatePatron.js</h1>
+    <h1 class="page-title">Source: modules/_buildSignature.js</h1>
 
     
 
@@ -27,27 +27,46 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/** 
- * @module jsPAPI/authenticatePatron
+ * @module jsPAPI/_buildSignature
  */
 
 /**
- * Authenticates and returns an access token for a patron
- *
- * @param {string} barcode
- * @param {string} password
  * 
- * @returns {promise}
-*/
+ * Build polaris signature for authentication request header
+ *
+ * @param {string} method - 'get' 'post' etc
+ * @param {string} url    - endpoint being requested
+ * @param {string} pass   - the user password or staff access secret
+ * 
+ * @requires crypto-js/hmac-sha1
+ * @requires crypto-js/enc-base64
+ * 
+ * @returns {object} - with structure: { sig : 'generated signature', date: 'A RFC 1123 GMT Date' }
+ */
+
+
 module.exports = function(parent) {
-    parent.authenticatePatron = function(barcode, password) {
-        return parent.call(
-            'authenticator/patron',
-            { auth: 'public', method: 'POST' },
-            { "Barcode": barcode, "Password": password }
-        );
+    parent._buildSignature = function(method, url, pass = false) {
+
+        var hmac_sha1 = require('crypto-js/hmac-sha1');
+        var enc_base64 = require('crypto-js/enc-base64');
+
+        var date = parent._polarisDate();
+    
+        if(pass) {
+            var sig = method + url + date + pass;
+        } else {
+            var sig = method + url + date;
+        }
+    
+        return {
+            sig: 'PWS ' + parent.configGet('accessid') + ':' + hmac_sha1(sig, parent.configGet('key')).toString(enc_base64),
+            date: date
+        };
     }
     return parent;
-}</code></pre>
+}
+</code></pre>
         </article>
     </section>
 

@@ -7,7 +7,7 @@
     "watch": "webpack --watch",
     "start": "webpack-dev-server --open",
     "build": "webpack",
-    "docs": "jsdoc lib -r -d docs -R README.md",
+    "docs": "jsdoc lib -r -d docs -R README.md -c jsdoc.json",
     "test": "mocha"
   },
   "author": "Vance Cole <vcole@midcolumbialibraries.org> (https://midcolumbialibraries.org)",
@@ -24,6 +24,7 @@
     "es6-promise": "^4.2.4",
     "gulp": "^3.9.1",
     "html-webpack-plugin": "^2.30.1",
+    "jsdoc": "^3.5.5",
     "mocha": "^5.0.1",
     "uglifyjs-webpack-plugin": "^1.2.0",
     "webpack": "^3.11.0",

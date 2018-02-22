@@ -152,7 +152,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsPAPI.js.html">jsPAPI.js</a>, <a href="jsPAPI.js.html#line6">line 6</a>
+        <a href="jsPAPI.js.html">jsPAPI.js</a>, <a href="jsPAPI.js.html#line5">line 5</a>
     </li></ul></dd>
     
 
@@ -175,6 +175,599 @@
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="module:jsPAPI/_buildSignature"><span class="type-signature"></span>module:jsPAPI/_buildSignature<span class="signature">(method, url, pass)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Build polaris signature for authentication request header
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">'get' 'post' etc</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">endpoint being requested</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pass</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the user password or staff access secret</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="modules__buildSignature.js.html">modules/_buildSignature.js</a>, <a href="modules__buildSignature.js.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+<h5>Requires:</h5>
+<ul>
+    <li>module:crypto-js/hmac-sha1</li>
+
+    <li>module:crypto-js/enc-base64</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - with structure: { sig : 'generated signature', date: 'A RFC 1123 GMT Date' }
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="module:jsPAPI/_init"><span class="type-signature"></span>module:jsPAPI/_init<span class="signature">(cfg)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Do initial setup stuff, for example reading config from .env and merging with custom params
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cfg</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">pass in any config values you want to override defaults</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="modules__init.js.html">modules/_init.js</a>, <a href="modules__init.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="module:jsPAPI/_log"><span class="type-signature"></span>module:jsPAPI/_log<span class="signature">(dump)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Dumps input to console
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dump</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">anything</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">whatever you want to dump</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="modules__log.js.html">modules/_log.js</a>, <a href="modules__log.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>myPapi.bibSearchKW('dogs', 'KW').then(function(response){ });</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="module:jsPAPI/_polarisDate"><span class="type-signature"></span>module:jsPAPI/_polarisDate<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get date formated to RFC-1123.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="modules__polarisDate.js.html">modules/_polarisDate.js</a>, <a href="modules__polarisDate.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - RFC-1123 formatted
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2350,7 +2943,7 @@
     
 
     
-    <h4 class="name" id="module:jsPAPI/configGet"><span class="type-signature"></span>module:jsPAPI/configGet<span class="signature">(key)</span><span class="type-signature"> &rarr; {variable}</span></h4>
+    <h4 class="name" id="module:jsPAPI/configGet"><span class="type-signature"></span>module:jsPAPI/configGet<span class="signature">(key)</span><span class="type-signature"> &rarr; {object}</span></h4>
     
 
     
@@ -2400,7 +2993,7 @@
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
@@ -2410,7 +3003,7 @@
 
             
 
-            <td class="description last">the key to lookup</td>
+            <td class="description last">the key to lookup, or 'all' to return all values</td>
         </tr>
 
     
@@ -2478,7 +3071,7 @@
 
         
 <div class="param-desc">
-    the value
+    - the value or object of all values, or null if object not found
 </div>
 
 
@@ -2489,7 +3082,7 @@
     </dt>
     <dd>
         
-<span class="param-type">variable</span>
+<span class="param-type">object</span>
 
 
     </dd>
@@ -2929,13 +3522,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-jsPAPI_authenticatePatron.html">jsPAPI/authenticatePatron</a></li><li><a href="module-jsPAPI_authenticateStaff.html">jsPAPI/authenticateStaff</a></li><li><a href="module-jsPAPI_bibGet.html">jsPAPI/bibGet</a></li><li><a href="module-jsPAPI_bibHoldingsGet.html">jsPAPI/bibHoldingsGet</a></li><li><a href="module-jsPAPI_bibSearch.html">jsPAPI/bibSearch</a></li><li><a href="module-jsPAPI_bibSearchKW.html">jsPAPI/bibSearchKW</a></li><li><a href="module-jsPAPI_call.html">jsPAPI/call</a></li><li><a href="module-jsPAPI_collectionsGet.html">jsPAPI/collectionsGet</a></li><li><a href="module-jsPAPI_configGet.html">jsPAPI/configGet</a></li><li><a href="module-jsPAPI_configSet.html">jsPAPI/configSet</a></li><li><a href="module-jsPAPI_limitFiltersGet.html">jsPAPI/limitFiltersGet</a></li><li><a href="module-jsPAPI_organizationsGet.html">jsPAPI/organizationsGet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#jsPAPI">jsPAPI</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-jsPAPI__buildSignature.html">jsPAPI/_buildSignature</a></li><li><a href="module-jsPAPI__init.html">jsPAPI/_init</a></li><li><a href="module-jsPAPI__log.html">jsPAPI/_log</a></li><li><a href="module-jsPAPI__polarisDate.html">jsPAPI/_polarisDate</a></li><li><a href="module-jsPAPI_authenticatePatron.html">jsPAPI/authenticatePatron</a></li><li><a href="module-jsPAPI_authenticateStaff.html">jsPAPI/authenticateStaff</a></li><li><a href="module-jsPAPI_bibGet.html">jsPAPI/bibGet</a></li><li><a href="module-jsPAPI_bibHoldingsGet.html">jsPAPI/bibHoldingsGet</a></li><li><a href="module-jsPAPI_bibSearch.html">jsPAPI/bibSearch</a></li><li><a href="module-jsPAPI_bibSearchKW.html">jsPAPI/bibSearchKW</a></li><li><a href="module-jsPAPI_call.html">jsPAPI/call</a></li><li><a href="module-jsPAPI_collectionsGet.html">jsPAPI/collectionsGet</a></li><li><a href="module-jsPAPI_configGet.html">jsPAPI/configGet</a></li><li><a href="module-jsPAPI_configSet.html">jsPAPI/configSet</a></li><li><a href="module-jsPAPI_limitFiltersGet.html">jsPAPI/limitFiltersGet</a></li><li><a href="module-jsPAPI_organizationsGet.html">jsPAPI/organizationsGet</a></li></ul><h3>Global</h3><ul><li><a href="global.html#jsPAPI">jsPAPI</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 21 2018 13:06:04 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 21 2018 22:17:06 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

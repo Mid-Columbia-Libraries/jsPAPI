@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/authenticatePatron.js</title>
+    <title>JSDoc: Module: jsPAPI/_init</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,39 +17,189 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/authenticatePatron.js</h1>
+    <h1 class="page-title">Module: jsPAPI/_init</h1>
 
     
 
 
 
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/** 
- * @module jsPAPI/authenticatePatron
- */
 
-/**
- * Authenticates and returns an access token for a patron
- *
- * @param {string} barcode
- * @param {string} password
- * 
- * @returns {promise}
-*/
-module.exports = function(parent) {
-    parent.authenticatePatron = function(barcode, password) {
-        return parent.call(
-            'authenticator/patron',
-            { auth: 'public', method: 'POST' },
-            { "Barcode": barcode, "Password": password }
-        );
-    }
-    return parent;
-}</code></pre>
-        </article>
-    </section>
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="module:jsPAPI/_init"><span class="type-signature"></span>(require("jsPAPI/_init"))<span class="signature">(cfg)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Do initial setup stuff, for example reading config from .env and merging with custom params
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cfg</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">pass in any config values you want to override defaults</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="modules__init.js.html">modules/_init.js</a>, <a href="modules__init.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
