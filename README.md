@@ -42,11 +42,11 @@ To start using the API you will need to create an instance of the jsPAPI class a
 // The below example shows the essential params you need
 // to set which are specific to your organization
 var config = {
-    accessid: 'your-web-app',
-    key: 'W3CV1V1H-GBUC-3E3P-QP42-1M9CODN0LHVU',
+    accessid: 'MyAppID',
+    key: 'SUPERSEC-RETC-ODES-DONT-PUBLISHONWEB',
+    server: 'catalog.mylibrary.org',
+    domain: 'MY-LIB',
     orgid: '1',
-    server: 'catalog.midcolumbialibraries.org',
-    domain: 'MCL-LIB',
 };
 
 // Initialize an API instance with the config

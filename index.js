@@ -8,7 +8,8 @@
 require('dotenv').config();
 
 // Load the main module
-jsPAPI = require('./lib/jsPAPI')();
+jsPAPI = require('./lib/jsPAPI');
 
 // Set export for NodeJS
 module.exports = jsPAPI;
+
