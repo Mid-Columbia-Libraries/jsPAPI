@@ -4,10 +4,17 @@ var expect = chai.expect;
 
 var jsPAPI = require('./../lib/jsPAPI');
 
+describe('Core Module', function() {
+	describe('jsPAPI', function() {
+		it('should be a constructor', function() {
+			expect(jsPAPI).to.be.a('function');
+		})
+	});
+});
+
 describe('Internal Methods', function() {
 
 	var api = new jsPAPI({ logging: false });
-	console.log(api);
 
 	describe('_init()', function() {
 		it('should load core modules', function() {
@@ -79,5 +86,16 @@ describe('Internal Methods', function() {
 				);
 		});
 	});
+});
 
+
+describe('Public Methods', function() {
+	
+	var api = new jsPAPI({ logging: false });
+
+	describe('call()', function() {
+		it('to return a promise', function() {
+			expect(api.call()).to.be.a('promise');
+		});
+	});
 });
