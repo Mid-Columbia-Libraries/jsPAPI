@@ -7,7 +7,8 @@
     "watch": "webpack --watch",
     "start": "webpack-dev-server --open",
     "build": "webpack",
-    "docs": "jsdoc lib -r -d docs -R README.md"
+    "docs": "jsdoc lib -r -d docs -R README.md",
+    "test": "mocha"
   },
   "author": "Vance Cole <vcole@midcolumbialibraries.org> (https://midcolumbialibraries.org)",
   "license": "MIT",

@@ -17,12 +17,10 @@ You can install JS-Polaris-API by cloning the repository or by downloading the c
 If you want to extend the API or use JS-Polaris-API in a NodeJS application you should probably clone the source repo. You will need [NodeJS](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) to install dependencies:
 
 ``` Bash
-
-mkdir jsPapi
-git clone https://git.midcolumbialibraries.org/js-papi jsPapi
-cd jsPapi
+mkdir jsPAPI
+git clone https://github.com/Mid-Columbia-Libraries/jsPAPI jsPAPI
+cd jsPAPI
 npm install
-
 ```    
 
 If you simply want to be able to use JS-Polaris-API from your web application, you can simply extract the base or minified version from `./dist` and include it in your HTML:
