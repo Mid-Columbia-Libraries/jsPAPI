@@ -2,12 +2,12 @@
 
 module.exports = {
     'key':      'SUPERSEC-RETC-0DES-D0NT-PUBL1SH0NWEB',
-    'accessid': 'drupal',
+    'accessid': 'your-id',
     'server':   'catalog.midcolumbialibraries.org',
     'domain':   'MCL-LIB',
     'appid':    '100',
     'orgid':    '1',
-    'scheme':   'https',
+    'scheme':   'https://',
     'path':     'PAPIService/REST',
     'version':  'v1',
     'lang':     '1033',
@@ -15,8 +15,8 @@ module.exports = {
     'accept':   'application/json',
     'auth':     'public',
     'authlvl':  'public',
+    'method':   'GET',
     'logging':  true,
     'token':    null,
     'pass':     null,
-    'method':   'GET',
 }
