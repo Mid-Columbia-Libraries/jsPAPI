@@ -75,7 +75,7 @@ describe('Internal Methods', function() {
 					'version',
 					'method',
 					'auth',
-					'authlevel',
+					'authlvl',
 					'pass',
 					'token',
 					'lang',
@@ -95,7 +95,7 @@ describe('Public Methods', function() {
 
 	describe('call()', function() {
 		it('should return a promise', function() {
-			expect(api.call()).to.be.a('promise');
+			expect(api.call('limitfilters')).to.be.a('promise');
 		});
 	});
 });

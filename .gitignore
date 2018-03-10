@@ -1,6 +1,9 @@
 # Local test file
 /test.js
 
+# config variables file
+/config.js
+
 # Local modules folder
 /lib/custom/*
 

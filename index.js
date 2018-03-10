@@ -4,11 +4,10 @@
  * that you want to exlusively run on NodeJS installs, fx. dotenv
  */
 
-// Loads environment variables such as server config, see ./.env
-require('dotenv').config();
-
 // Load the main module
 jsPAPI = require('./lib/jsPAPI');
+
+jsPAPI();
 
 // Set export for NodeJS
 module.exports = jsPAPI;
