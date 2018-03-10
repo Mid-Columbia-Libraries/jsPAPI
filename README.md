@@ -58,10 +58,10 @@ If you want to extend the API or use jsPAPI in a NodeJS application you should p
     npm install
 ```
 
-You may want to copy `.env.example` to `.env` to set up your environment variables such as your API Server, key, AccessID and Domain. If you are using jsPAPI for browsers you must instead pass configuration at initialization, see [initialization](#init).
+You may want to copy `config.example.js` to `config.js` to set up your environment variables such as your API Server, key, AccessID and Domain. Alternatively, you can pass the needed config params at initialization, see: [initialization](#init).
 
 ``` Bash
-    cp .env.example .env
+    cp config.example.js config.js
 ```
 
 See [configuration](#config) for a list of valid configuration options.
@@ -80,7 +80,7 @@ If you want to be able to use jsPAPI from your web application, you can simply e
 
 jsPAPI is namespaced under the global `jsPAPI`.
 
-To start using the API you will need to create an instance of the jsPAPI class and pass it configuration for your API Server. This can be accomplished by either editing your .env file, or passing parameters to the instance when you create it:
+To start using the API you will need to create an instance of the jsPAPI class and pass it configuration for your API Server. This can be accomplished by either editing your config.js file, or passing parameters to the instance when you create it:
 
 ``` Javascript
     // Most configuration options have reasonable defaults
