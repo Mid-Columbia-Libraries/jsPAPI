@@ -1,6 +1,6 @@
 {
   "name": "js-polaris-api",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A javascript wrapper for the Polaris API",
   "main": "index.js",
   "scripts": {
