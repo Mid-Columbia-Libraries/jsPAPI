@@ -126,7 +126,7 @@ Your domain is the domain that Polaris uses to authenticate staff, in the Polari
 * encode - 'application/json'
 * accept - 'application/json'
 * logging - true
-* authlevel - all
+* authlvl - all
 
 ---
     
@@ -234,7 +234,7 @@ You will need to restart IIS for this to take effect. Open a command prompt with
     iisreset
 ```
 
-Now you can initialize the PolarisAPI with the config parameter "authlevel":"patron" and you will be able to call public methods without an access key.
+Now you can initialize the PolarisAPI with the config parameter "authlvl":"patron" and you will be able to call public methods without an access key.
 
 ### What is the built-in development server and how do I use it?
 
