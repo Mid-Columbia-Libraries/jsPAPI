@@ -95,7 +95,7 @@ To start using the API you will need to create an instance of the jsPAPI class a
     };
 
     // Initialize an API instance with the config
-    var myApi = new Papi({ config });
+    var myApi = new Papi(config);
 ```
 
 ---
@@ -248,7 +248,23 @@ This will bundle and regenerate the `./dist` directory. Now open your browser to
 
 ### I want to extend or modify JS-Polaris-API, how do I do so?
 
-You can add custom modules to `./lib/custom` and they will be loaded after stock modules. Your custom modules can either implement new functions which will work alongside the default methods, or you can replace default methods. To get started, copy an existing method from `./lib/modules` and edit the contents. If you need to rebuild the distribution bundle for use in a web based project run:
+You can add custom modules to `./lib/custom` and they will be loaded after stock modules. You will need to initialize jsPAPI with the customModules parameter as an array of your modules:
+
+``` Javascript
+    var config = {
+        ...
+    };
+
+    var customModules = [
+        'myModule', // A custom module to be added to your instance
+        'bibGet',   // A custom module which will REPLACE the default bibGet() module
+    ];
+
+    // Initialize an API instance with the config
+    var myApi = new Papi(config, customModules );
+```
+
+ Your custom modules can either implement new functions which will work alongside the default methods, or you can replace default methods. To get started, copy an existing method from `./lib/modules` and edit the contents. If you need to rebuild the distribution bundle for use in a web based project run:
 
 ``` Bash
     npm run build
